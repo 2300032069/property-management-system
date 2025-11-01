@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "8082:8082"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=db
+    depends_on:
+      - db
+    
+  db:
+    image: mysql:8.0
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=Kuppalagokul@123
+      - MYSQL_DATABASE=property_db
+      - MYSQL_USER=prop_admin
+      - MYSQL_PASSWORD=Kuppalagokul@123
+
+volumes:
+  mysql-data:
